@@ -1,0 +1,18 @@
+{
+	"Environment":{
+	
+		"DEV":{
+			"URL":"http://www.automationpractice.pl/"
+		},
+		
+		"QA":{
+		     "URL":"http://www.automationpractice.pl/"
+		},
+		
+		"UAT":{
+		 	"URL":"http://www.automationpractice.pl/"
+		}
+	
+	}
+
+}
