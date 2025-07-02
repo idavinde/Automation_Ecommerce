@@ -10,7 +10,7 @@ name: Test Auto Workflow
 
 on:
   schedule:
-  - cron: 23 30 * * *
+    - cron: 00 30 * * *
   push:
     branches: [ "master" ] 
   pull_request:
