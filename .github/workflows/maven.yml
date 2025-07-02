@@ -29,24 +29,26 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-        
+    - name: Show directory structure
+      run: ls -R
+      
     - name: Running Test Automation Framework with Maven
       run: mvn test -X -Dbrowser=chrome -DisHeadless=false -DisLambdaTest=true
-      working-directory: Automation_Ecommerce
+      
 
     - name: Upload a Test Logs
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: Test Logs
-        path: Automation_Ecommerce/logs/
+        path: logs/
 
     - name: Upload a Screenshot
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: screenshots
-        path: Automation_Ecommerce/screenshots/
+        path: screenshots/
 
     - name: Upload a Test Report
       if: always()
@@ -60,8 +62,8 @@ jobs:
 
       run: | 
         mkdir -p public/extent-reports/
-        cp -R Automation_Ecommerce/report.html public/extent-reports/
-        cp -R Automation_Ecommerce/screenshots/ public/extent-reports/screenshots/
+        cp -R report.html public/extent-reports/
+        cp -R screenshots/ public/extent-reports/screenshots/
         ls -l
 
     - name: Deploy
