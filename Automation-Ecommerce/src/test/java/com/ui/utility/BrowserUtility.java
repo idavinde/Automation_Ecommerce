@@ -40,6 +40,7 @@ public abstract class BrowserUtility {
 				logger.info("Launching the Chrome Browser");
 				ChromeOptions options = new ChromeOptions();
 				options.addArguments("--headless");
+				options.addArguments("--window-size=1920,1080");
 				driver.set(new ChromeDriver(options));
 			} else {
 				
@@ -104,7 +105,7 @@ public abstract class BrowserUtility {
 		driver.get().findElement(locator).click();
 	}
 	
-	public String visibleText(By locator) {
+	public String getVisibleText(By locator) {
 		
 		logger.info("Copy the Visibile text from locator: " + locator);
 		return driver.get().findElement(locator).getText();
@@ -118,15 +119,16 @@ public abstract class BrowserUtility {
 	
 	public String takeScreenshot(String name) {
 		
+		TakesScreenshot takesScreenshot = (TakesScreenshot) driver.get();
 		Date date = new Date();
-		SimpleDateFormat  simpleDateFormat= new SimpleDateFormat("");
+		SimpleDateFormat  simpleDateFormat= new SimpleDateFormat("MM-dd-yyyy_HH-mm-ss");
 		String timeStamp= simpleDateFormat.format(date);
 		
-		TakesScreenshot takesScreenshot = (TakesScreenshot) driver.get();
+		
 		
 		File  srcfile =takesScreenshot.getScreenshotAs(OutputType.FILE);
 		
-		String path = "./screenshot"+timeStamp+"-"+name+".png";
+		String path = "./screenshot/"+name+"-"+timeStamp+".png";
 		
 		File file = new File(path);
 		

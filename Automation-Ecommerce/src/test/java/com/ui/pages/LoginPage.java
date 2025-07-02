@@ -18,11 +18,13 @@ public final class LoginPage extends BrowserUtility {
 			private static final By LOGIN_BUTTON= By.id("SubmitLogin");
 			
 			
-			public void loginWith(String emailAddress, String password) {
+			public MyAccount loginWith(String emailAddress, String password) {
 				
 				enterText(EMAIL_ADDRESS, emailAddress);
 				enterText(PASSWORD, password);
 				clickOn(LOGIN_BUTTON);
+				
+				return new MyAccount(getDriver());
 			}
 
 }
