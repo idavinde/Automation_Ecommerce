@@ -34,21 +34,21 @@ jobs:
       
     - name: Running Test Automation Framework with Maven
       run: mvn test -X -Dbrowser=chrome -DisHeadless=false -DisLambdaTest=true
-      
+      working-directory: Automation-Ecommerce
 
     - name: Upload a Test Logs
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: Test Logs
-        path: logs/
+        path: Automation-Ecommerce/logs/
 
     - name: Upload a Screenshot
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: screenshots
-        path: screenshots/
+        path: Automation-Ecommerce/screenshots/
 
     - name: Upload a Test Report
       if: always()
@@ -62,8 +62,8 @@ jobs:
 
       run: | 
         mkdir -p public/extent-reports/
-        cp -R report.html public/extent-reports/
-        cp -R screenshots/ public/extent-reports/screenshots/
+        cp -R Automation-Ecommerce/report.html   public/extent-reports/
+        cp -R Automation-Ecommerce/screenshots/  public/extent-reports/screenshots/
         ls -l
 
     - name: Deploy
