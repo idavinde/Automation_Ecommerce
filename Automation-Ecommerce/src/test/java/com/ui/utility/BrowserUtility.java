@@ -128,7 +128,7 @@ public abstract class BrowserUtility {
 		
 		File  srcfile =takesScreenshot.getScreenshotAs(OutputType.FILE);
 		
-		String path = "./screenshot/"+name+"-"+timeStamp+".png";
+		String path = "./screenshots/"+name+"-"+timeStamp+".png";
 		
 		File file = new File(path);
 		
