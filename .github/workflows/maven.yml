@@ -31,36 +31,37 @@ jobs:
         cache: maven
         
     - name: Running Test Automation Framework with Maven
-      run: mvn test -X -Dbrowser=chrome -DisHeadless=false -DisLambdaTest=true  
+      run: mvn test -X -Dbrowser=chrome -DisHeadless=false -DisLambdaTest=true
+      working-directory: Automation_Ecommerce
 
     - name: Upload a Test Logs
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: Test Logs
-        path: logs/
+        path: Automation_Ecommerce/logs/
 
     - name: Upload a Screenshot
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: screenshots
-        path: screenshots/
+        path: Automation_Ecommerce/screenshots/
 
     - name: Upload a Test Report
       if: always()
       uses: actions/upload-artifact@v4.6.2
       with:
         name: Test report
-        path: report.html
+        path: Automation_Ecommerce/report.html
       
     - name: Copy Report to gh-pages Folder
       if: always()
 
       run: | 
         mkdir -p public/extent-reports/
-        cp -R report.html public/extent-reports/
-        cp -R screenshots/ public/extent-reports/screenshots/
+        cp -R Automation_Ecommerce/report.html public/extent-reports/
+        cp -R Automation_Ecommerce/screenshots/ public/extent-reports/screenshots/
         ls -l
 
     - name: Deploy
