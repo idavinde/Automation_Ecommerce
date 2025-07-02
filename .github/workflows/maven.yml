@@ -33,7 +33,7 @@ jobs:
       run: ls -R
       
     - name: Running Test Automation Framework with Maven
-      run: mvn test -X -Dbrowser=chrome -DisHeadless=false -DisLambdaTest=true
+      run: mvn test -X -DbrowserName=chrome -DisHeadless=false -DisLambdaTest=true
       working-directory: Automation-Ecommerce
 
     - name: Upload a Test Logs
