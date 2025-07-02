@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v4.6.2
       with:
         name: Test report
-        path: Automation_Ecommerce/report.html
+        path: Automation-Ecommerce/report.html
       
     - name: Copy Report to gh-pages Folder
       if: always()
