@@ -1,0 +1,77 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Test Auto Workflow
+
+on:
+  schedule:
+   - cron: 00 20 * * *
+  push:
+    branches: [ "master" ] 
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Show directory structure
+      run: ls -R
+      
+    - name: Running Test Automation Framework with Maven
+      run: mvn test -X -DbrowserName=chrome -DisHeadless=false -DisLambdaTest=true
+      working-directory: Automation-Ecommerce
+
+    - name: Upload a Test Logs
+      if: always()
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: Test Logs
+        path: Automation-Ecommerce/logs/
+
+    - name: Upload a Screenshot
+      if: always()
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: screenshots
+        path: Automation-Ecommerce/screenshots/
+
+    - name: Upload a Test Report
+      if: always()
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: Test report
+        path: Automation-Ecommerce/report.html
+      
+    - name: Copy Report to gh-pages Folder
+      if: always()
+
+      run: | 
+        mkdir -p public/extent-reports/
+        cp -R Automation-Ecommerce/report.html   public/extent-reports/
+        cp -R Automation-Ecommerce/screenshots/  public/extent-reports/screenshots/
+        ls -l
+
+    - name: Deploy
+      if: always()
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: public/extent-reports/
+        token: ${{ secrets.PAT1 }}
+        clean: true|
+        
+      
