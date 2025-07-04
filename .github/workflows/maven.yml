@@ -33,7 +33,7 @@ jobs:
       run: ls -R
       
     - name: Running Test Automation Framework with Maven
-      run: mvn test -X -DbrowserName=chrome -DisHeadless=false -DisLambdaTest=true
+      run: mvn test -X -DbrowserName=chrome -DisHeadless=false -DisLambdaTest=true 
       working-directory: Automation-Ecommerce
 
     - name: Upload a Test Logs
@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v4.6.2
       with:
         name: Test Logs
-        path: Automation-Ecommerce/logs/
+        path: Automation-Ecommerce/Logs/
 
     - name: Upload a Screenshot
       if: always()
