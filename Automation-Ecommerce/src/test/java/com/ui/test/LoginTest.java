@@ -14,11 +14,20 @@ import com.ui.pojo.User;
 public class LoginTest extends TestBase {
 	
 
-	@Test(dataProviderClass = com.ui.utility.JSONReadUtility.class, dataProvider= "loginTestData", retryAnalyzer= com.ui.listener.MyRetryAnalyzer.class)
+	@Test(description= "Verifies with the valid user is able to login into the application" , dataProviderClass = com.ui.utility.JSONReadUtility.class, dataProvider= "loginTestData", retryAnalyzer= com.ui.listener.MyRetryAnalyzer.class)
 	public void loginTest(User user) {
 		
 		
 		assertEquals(homepage.goToLogin().loginWith(user.getEmailAddress(), user.getPassword()).getHeaderText(), "MY ACCOUNT");
 	}
+	
+	@Test(dataProviderClass = com.ui.utility.JSONReadUtility.class, dataProvider= "loginTestData", retryAnalyzer= com.ui.listener.MyRetryAnalyzer.class)
+	public void loginTestInvalid(User user) {
+		
+		
+		assertEquals(homepage.goToLogin().loginWith(user.getEmailAddress(), user.getPassword()).getHeaderText(), "MY ACCOUNT");
+	}
+	
+	
 
 }
